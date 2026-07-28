@@ -123,7 +123,7 @@ always use different styling"""
 
 final_prompt = prompt + resume_maker_prompt()
 
-user_info = st.txt_input("Enter you information")
+user_info = st.text_input("Enter you information")
 
 user_details = f"""user details: given below:
 Resume info: {user_info}
