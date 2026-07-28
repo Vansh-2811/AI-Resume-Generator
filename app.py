@@ -138,12 +138,26 @@ user_details= f"""user details:given beow :
 Resume info {USER_INFO}
 Photo: {uploaded_file }
 Photo present in current directory with name as 
-uploaded_file, and once resume generated give
+uploaded_file, and once resume generated give an on click pdf
 download button in same html code.
 DEFAULT IF NOT GIVEN : PYTHON DEVELOPER RESUME """
 query = final_prompt+user_details
 
 import base64
+OPTIONS = ["DELHI","NOIDA", "GURUGRAM","KANPUR","PUNE","LUCKNOW","BANGLORE"]
+
+LOCATION = st.sidebar.multiselect('SELECT LOCATAION: ', options = OPTIONS)
+
+JOB_PROFLE = ["PYTHON DEVELOPER",'GEN AI',"FULL-STACK-DEVELOPER",'DATA ANALYST']
+
+PROFILE = st.sidebar.multiselect('SELECT JOB ROLE: ', options = JOB_PROFILE)
+
+job_prompt = f"""Based on (PROFILE) jobs in {LOCATION}, I
+want latest job news in using tavily,
+try top 10 search or whatever available
+and give result like naukri theme design with
+job name, job desc, salary,
+apply link output must be in html"""
 
 if st.button('generate resume'):
   with st.spinner("running agent"):
@@ -161,3 +175,9 @@ if st.button('generate resume'):
     
    
     st.html(code, width="stretch", unsafe_allow_javascript=True)
+
+    st.divider()
+    response = agemnt.invoke({'messages':[{'role':'user','content':job_prompt}]})
+
+    job_code = response['messages'][-1].content[-1]['text']
+    st.html(job_code, width = "stretch" , unsafe_allow_javascript = True)
