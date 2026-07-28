@@ -124,7 +124,7 @@ if uploaded_file is not None:
 
 prompt="""You are a helpful AI assistant with job resume maker, your task
 is to give HTML format resume, with proper designing using recent CSS and JS
-code, with professional design format. User will upload data and return HTML
+code, with different design format. User will upload data and return HTML
 format resume, always use different styling  theme  contrast in resume
 
 IMPORTANT: wherever the profile photo goes in the resume, output exactly this tag and nothing else:
